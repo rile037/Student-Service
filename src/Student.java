@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 // Interface LoginHandler za pristup Studentskom Servisu
 
@@ -151,8 +148,34 @@ class Student implements loginHandler{
             }
             else{
                 Student.getSpisakStudenata().add(student);
-                System.out.println(student.getIme() + " je dodat u spisak.");
+                System.out.println(student.getIme() + " je obrisan sa spiska.");
             }
+        }
+    }
+
+    class Predmet extends Student{
+        private double prosek;
+        String[] predmeti = {"ETF", "PDF", "MTA", "TTA", "ENG", "INZM", "AOR","OTF","IOR","IPA"};
+
+        // To Do za funkciju upisiavanja ocena
+        //HashMap<String, Integer> predmetiOcene = new HashMap<String, Integer>();
+
+
+        public Predmet(double prosek, String[] predmeti){
+            super(korisnickoIme, lozinka, ime, imeRoditelja, prezime, datumRodjenja, smer, godinaUpisa);
+            this.prosek = prosek;
+            //this.predmeti = predmeti;
+
+            // algoritam za upis ocene
+//            for(int i = 0; i < predmeti.length; i++){
+//                predmetiOcene.put(predmeti[i],10);
+//            }
+
+
+        }
+
+        public void setProsek(double prosek) {
+            this.prosek = prosek;
         }
     }
 }

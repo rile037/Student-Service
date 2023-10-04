@@ -1,36 +1,19 @@
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void adminMenu() {
-        System.out.println("Dobrodosli admin");
         // Dodajte funkcionalnosti za admin meni ovde
     }
 
-    public static void studentMenu(Student student) {
-        Scanner scanner = new Scanner(System.in);
+    public static void studentMenu() {
         System.out.println("Dobrodosli studente");
-        while(true){
-            System.out.println(student.getIme() + ", dobrodosli na studentski servis.");
-            System.out.println("\n- Izaberite opciju: ");
-            System.out.println("1. Pogledaj predmete");
-
-            int izbor = scanner.nextInt();
-
-            switch (izbor) {
-                case 1 -> System.out.println("Predmeti:");
-                case 0 -> {
-                    scanner.close();
-                    System.exit(0);
-                }
-                default -> System.out.println("Pogresan izbor.");
-            }
-
-        }
+        // Dodajte funkcionalnosti za student meni ovde
     }
+
     public static void main(String[] args) {
         Student.Admin admin = new Student.Admin();
         Student student = new Student("rile037", 123, "Nikola", "Radisa", "Rilak", "14.08.1999.", "NRT", 2018);
@@ -48,7 +31,6 @@ public class Main {
             String lozinkaAdmin = scanner.next();
 
             if (korisnickoIme.equals("admin") && lozinkaAdmin.equals("admin")) {
-                adminMenu();
                 isAdmin = true; // Postavljamo isAdmin na true za admina
                 break;
             } else {
@@ -66,16 +48,23 @@ public class Main {
 
         // Nakon uspešnog logovanja, prikažite odgovarajući meni
         if (isAdmin) {
+            LocalDateTime vremeSada = LocalDateTime.now();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss");
+            String vreme = vremeSada.format(format);
+            System.out.println("Dobrodosli admin");
+            System.out.println(vreme);
             // Ako je admin prijavljen, prikaži admin meni
             while (true) {
                 adminMenu(); // Pozivamo adminMenu metodu za admina
                 // Dodajte funkcionalnosti za admin meni ovde
-
-                int izbor = scanner.nextInt();
-
-                switch (izbor) {
+                System.out.print("Unos: ");
+                String komanda = scanner.next();
+                switch (komanda) {
+                    case "whoami" -> {
+                        System.out.println("- admin");
+                    }
                     // Dodajte opcije za admin meni
-                    case 0 -> {
+                    case "exit" -> {
                         scanner.close();
                         System.exit(0);
                     }
@@ -85,7 +74,7 @@ public class Main {
         } else {
             // Ako je student prijavljen, prikaži student meni
             while (true) {
-                studentMenu(student); // Pozivamo studentMenu metodu za studenta
+                studentMenu(); // Pozivamo studentMenu metodu za studenta
                 // Dodajte funkcionalnosti za student meni ovde
 
                 int izbor = scanner.nextInt();
@@ -100,6 +89,5 @@ public class Main {
                 }
             }
         }
-
     }
 }
