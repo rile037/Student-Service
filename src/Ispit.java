@@ -44,7 +44,7 @@ public class Ispit {
             System.out.println((i + 1) + ". " + ispit + " - " + datum + "\n");
         }
     }
-    
+
     public void dodajIspitUKorisnickuListu(String predmet) {
         korisnickaListaIspita.add(predmet);
     }

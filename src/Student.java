@@ -16,6 +16,7 @@ interface loginHandler{
 interface AdminInterface{
     void dodajStudenta(Student.Admin admin, Student student);
     void obrisiStudenta(Student.Admin admin, Student student);
+    void izlistajStudente();
 }
 
 class Student implements loginHandler{
@@ -46,7 +47,6 @@ class Student implements loginHandler{
         this.datumRodjenja = datumRodjenja;
         this.smer = smer;
         this.godinaUpisa = godinaUpisa;
-        spisakStudenata.add(this);
     }
 
     public static List<Student> getSpisakStudenata(){
@@ -116,12 +116,12 @@ class Student implements loginHandler{
         this.godinaUpisa = godinaUpisa;
     }
 
-    public void prikaziStudenta(Student student){
+    public void prikaziStudenta(){
         System.out.println("--------- Student ---------");
-        System.out.println(student.getIme() + ", " + student.getImeRoditelja() + ", " + student.getPrezime());
-        System.out.println("Datum rodjenja: " + student.getDatumRodjenja());
-        System.out.println("Smer: " + student.getSmer());
-        System.out.println("Godina upisa: " + student.getGodinaUpisa());
+        System.out.println(this.getIme() + ", " + this.getImeRoditelja() + ", " + this.getPrezime());
+        System.out.println("Datum rodjenja: " + this.getDatumRodjenja());
+        System.out.println("Smer: " + this.getSmer());
+        System.out.println("Godina upisa: " + this.getGodinaUpisa());
         System.out.println("----------------------------");
 
     }
@@ -163,6 +163,13 @@ class Student implements loginHandler{
             else{
                 Student.getSpisakStudenata().add(student);
                 System.out.println(student.getIme() + " je obrisan sa spiska.");
+            }
+        }
+
+        @Override
+        public void izlistajStudente(){
+            for(Student x : getSpisakStudenata()){
+                x.prikaziStudenta();
             }
         }
     }
