@@ -1,7 +1,5 @@
 # Studentski Servis
 
-# Informacioni Sistem za Studente
-
 ## Opis
 Informacioni sistem za studente je Java konzolna aplikacija koja pruža funkcionalnost kako administratorima tako i studentima. Omogućava studentima da se prijave, pregledaju datume ispita i dodaju ispite na svoju listu. Administratori mogu upravljati informacijama o studentima i izvršavati administrativne zadatke. Ovaj README.md fajl pruža pregled strukture projekta i njegove funkcionalnosti.
 
