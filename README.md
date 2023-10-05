@@ -48,6 +48,21 @@ Da biste pokrenuli ovaj projekat, pratite sledeće korake:
 
 ## Fotografije
 
+### Prijava
+![prijava](https://github.com/rile037/Studentski-Servis/assets/60843900/6a8260d1-feed-47bc-8c91-64ebe039e839)
+***
+### Prijava ispita
+![dodavanjeIspita](https://github.com/rile037/Studentski-Servis/assets/60843900/dae90bd4-bfba-4404-aa34-d7412460dccb)
+***
+### Lista ispita
+![korisnickaListaIspita](https://github.com/rile037/Studentski-Servis/assets/60843900/3c4f1fa7-d2c7-4342-aee0-51f3d94b0eb2)
+***
+### Admin Login Interfejs
+![adminLogin](https://github.com/rile037/Studentski-Servis/assets/60843900/48e26030-97eb-48b3-b1b3-cc83795ed196)
+***
+### Admin komanda
+![komandaIzlistaj](https://github.com/rile037/Studentski-Servis/assets/60843900/57e1b306-ec31-4802-9602-c1bf3fe0310d)
+
 
 ## Licenca
 Ovaj projekat je licenciran pod MIT licencom. Slobodno ga koristite, modifikujte i distribuirajte prema potrebama.
