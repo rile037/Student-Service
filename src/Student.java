@@ -115,8 +115,19 @@ class Student implements loginHandler{
     public void setGodinaUpisa(int godinaUpisa) {
         this.godinaUpisa = godinaUpisa;
     }
+
+    public void prikaziStudenta(Student student){
+        System.out.println("--------- Student ---------");
+        System.out.println(student.getIme() + ", " + student.getImeRoditelja() + ", " + student.getPrezime());
+        System.out.println("Datum rodjenja: " + student.getDatumRodjenja());
+        System.out.println("Smer: " + student.getSmer());
+        System.out.println("Godina upisa: " + student.getGodinaUpisa());
+        System.out.println("----------------------------");
+
+    }
     static class Admin implements AdminInterface{
 
+        private final String[] spisakKomandi = {"whoami", "dodajstudenta", "obrisistudenta", "izlistajstudente"};
         private String korisnickoIme;
         private String lozinka;
         private boolean admin;
@@ -129,6 +140,9 @@ class Student implements loginHandler{
 
         public String whoami(){
             return this.korisnickoIme;
+        }
+        public String[] getSpisakKomandi(){
+            return this.spisakKomandi;
         }
 
         @Override
@@ -150,32 +164,6 @@ class Student implements loginHandler{
                 Student.getSpisakStudenata().add(student);
                 System.out.println(student.getIme() + " je obrisan sa spiska.");
             }
-        }
-    }
-
-    class Predmet extends Student{
-        private double prosek;
-        String[] predmeti = {"ETF", "PDF", "MTA", "TTA", "ENG", "INZM", "AOR","OTF","IOR","IPA"};
-
-        // To Do za funkciju upisiavanja ocena
-        //HashMap<String, Integer> predmetiOcene = new HashMap<String, Integer>();
-
-
-        public Predmet(double prosek, String[] predmeti){
-            super(korisnickoIme, lozinka, ime, imeRoditelja, prezime, datumRodjenja, smer, godinaUpisa);
-            this.prosek = prosek;
-            //this.predmeti = predmeti;
-
-            // algoritam za upis ocene
-//            for(int i = 0; i < predmeti.length; i++){
-//                predmetiOcene.put(predmeti[i],10);
-//            }
-
-
-        }
-
-        public void setProsek(double prosek) {
-            this.prosek = prosek;
         }
     }
 }

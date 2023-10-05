@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDateTime;
@@ -6,12 +8,23 @@ import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void adminMenu() {
-        // Dodajte funkcionalnosti za admin meni ovde
+        LocalDateTime vremeSada = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss");
+        String vreme = vremeSada.format(format);
+        Student.Admin admin = new Student.Admin();
+        System.out.println("Dobrodosli admin, vreme sesije: " + vreme + "\n");
+        System.out.println("- Spisak svih komandi: ");
+        for(String komanda : admin.getSpisakKomandi()){
+            System.out.print(komanda + ", ");
+        }
+        System.out.println("\n");
     }
 
     public static void studentMenu() {
-        System.out.println("Dobrodosli studente");
-        // Dodajte funkcionalnosti za student meni ovde
+        System.out.println("\n1. Prijavi ispit");
+        System.out.println("2. Pogledaj sve datume ispita");
+        System.out.println("3. Pogledaj prijavljene ispite");
+        System.out.println("0. Izlaz");
     }
 
     public static void main(String[] args) {
@@ -19,8 +32,9 @@ public class Main {
         Student student = new Student("rile037", 123, "Nikola", "Radisa", "Rilak", "14.08.1999.", "NRT", 2018);
         Scanner scanner = new Scanner(System.in);
         List<Student> listaStudenata = Student.getSpisakStudenata();
+        Ispit ispit = new Ispit();
         boolean prijavljen = false;
-        boolean isAdmin = false; // Dodali smo isAdmin promenljivu
+        boolean isAdmin = false; //
 
         System.out.println("Dobrodosli, molimo Vas da se prijavite");
 
@@ -48,22 +62,27 @@ public class Main {
 
         // Nakon uspešnog logovanja, prikažite odgovarajući meni
         if (isAdmin) {
-            LocalDateTime vremeSada = LocalDateTime.now();
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss");
-            String vreme = vremeSada.format(format);
-            System.out.println("Dobrodosli admin");
-            System.out.println(vreme);
+            adminMenu();
             // Ako je admin prijavljen, prikaži admin meni
             while (true) {
-                adminMenu(); // Pozivamo adminMenu metodu za admina
-                // Dodajte funkcionalnosti za admin meni ovde
-                System.out.print("Unos: ");
+                 // Pozivamo adminMenu metodu za admina
+                System.out.println("Unos: ");
                 String komanda = scanner.next();
                 switch (komanda) {
                     case "whoami" -> {
                         System.out.println("- admin");
                     }
-                    // Dodajte opcije za admin meni
+                    case "dodajstudenta" -> {
+                        System.out.println("- dodajStudenta");
+                    }
+                    case "izbrisistudenta" ->{
+                        System.out.println("- izbrisiStudenta");
+                    }
+                    case "izlistajstudente" -> {
+                        for(Student x : Student.getSpisakStudenata()){
+                            student.prikaziStudenta(x);
+                        }
+                    }
                     case "exit" -> {
                         scanner.close();
                         System.exit(0);
@@ -72,15 +91,56 @@ public class Main {
                 }
             }
         } else {
+            System.out.println("Dobrodosli, " + student.getIme());
             // Ako je student prijavljen, prikaži student meni
             while (true) {
                 studentMenu(); // Pozivamo studentMenu metodu za studenta
-                // Dodajte funkcionalnosti za student meni ovde
-
+                HashMap<String, String> datumiSvihIspita = ispit.getDatumiSvihIspita();
                 int izbor = scanner.nextInt();
-
+                scanner.nextLine();
                 switch (izbor) {
-                    // Dodajte opcije za student meni
+                    case 1 -> {
+                        ispit.prikaziDatumeIspita();
+                        // Omogućavanje korisniku da dodaje ispite u svoju listu
+                        while (true) {
+                            System.out.print("Unesite redni broj ispita koji želite dodati (ili '0' za izlaz): ");
+                            int unos = scanner.nextInt();
+                            if (unos == 0) {
+                                break;
+                            }
+                            try {
+                                String[] sviPredmeti = ispit.getSviPredmeti();
+                                if (unos >= 1 && unos <= sviPredmeti.length) {
+                                    String predmet = sviPredmeti[unos - 1];
+                                    ispit.dodajIspitUKorisnickuListu(predmet);
+                                    System.out.println(predmet + " je dodat u vašu listu ispita.");
+                                } else {
+                                    System.out.println("Uneli ste nevažeći redni broj.");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Uneli ste neispravan format. Molimo vas unesite redni broj.");
+                            }
+                        }
+                    }
+
+                    case 2 -> {
+                        ispit.prikaziDatumeIspita();
+                    }
+
+                    case 3 -> {
+                        ArrayList<String> korisnickaListaIspita = ispit.getKorisnickaListaIspita();
+                        if(korisnickaListaIspita.isEmpty()){
+                            System.out.println("\nNiste prijavili nijedan ispit");
+                        }
+                        else{
+                            System.out.println("\nVaša lista ispita:");
+                            for (int i = 0; i < korisnickaListaIspita.size(); i++) {
+                                String x = korisnickaListaIspita.get(i);
+                                String datum = datumiSvihIspita.get(x); // Dobijanje datuma za odabrani ispit
+                                System.out.println((i + 1) + ". " + x + " - " + datum);
+                            }
+                        }
+                    }
                     case 0 -> {
                         scanner.close();
                         System.exit(0);
