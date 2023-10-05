@@ -60,12 +60,10 @@ public class Main {
             }
         }
 
-        // Nakon uspešnog logovanja, prikažite odgovarajući meni
+        // Nakon uspešnog logovanja, ide provera za admina
         if (isAdmin) {
             adminMenu();
-            // Ako je admin prijavljen, prikaži admin meni
             while (true) {
-                 // Pozivamo adminMenu metodu za admina
                 System.out.println("Unos: ");
                 String komanda = scanner.next();
                 switch (komanda) {
@@ -91,10 +89,10 @@ public class Main {
                 }
             }
         } else {
+            // U suprotnom prikazujemo studenta i njegov interfejs
             System.out.println("Dobrodosli, " + student.getIme());
-            // Ako je student prijavljen, prikaži student meni
             while (true) {
-                studentMenu(); // Pozivamo studentMenu metodu za studenta
+                studentMenu(); // Pozivamo studentMenu u kojem je spisak opcija
                 HashMap<String, String> datumiSvihIspita = ispit.getDatumiSvihIspita();
                 int izbor = scanner.nextInt();
                 scanner.nextLine();
@@ -136,7 +134,7 @@ public class Main {
                             System.out.println("\nVaša lista ispita:");
                             for (int i = 0; i < korisnickaListaIspita.size(); i++) {
                                 String x = korisnickaListaIspita.get(i);
-                                String datum = datumiSvihIspita.get(x); // Dobijanje datuma za odabrani ispit
+                                String datum = datumiSvihIspita.get(x);
                                 System.out.println((i + 1) + ". " + x + " - " + datum);
                             }
                         }

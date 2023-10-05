@@ -44,11 +44,7 @@ public class Ispit {
             System.out.println((i + 1) + ". " + ispit + " - " + datum + "\n");
         }
     }
-
-
-
-    // Konstruktor i ostale metode ostaju nepromenjeni
-
+    
     public void dodajIspitUKorisnickuListu(String predmet) {
         korisnickaListaIspita.add(predmet);
     }
