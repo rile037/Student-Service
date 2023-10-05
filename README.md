@@ -1,13 +1,16 @@
 # Studentski Servis
 
 ## Opis
-Informacioni sistem za studente je Java konzolna aplikacija koja pruža funkcionalnost kako administratorima tako i studentima. Omogućava studentima da se prijave, pregledaju datume ispita i dodaju ispite na svoju listu. Administratori mogu upravljati informacijama o studentima i izvršavati administrativne zadatke. Ovaj README.md fajl pruža pregled strukture projekta i njegove funkcionalnosti.
+Studentski Servis je Java konzolna aplikacija koja pravi simulaciju stvarnog studentskog sistema, koji je danas implementiran u skoro svakoj školskoj ustanovi. 
+
+Servis pruža razne mogućnosti, kako administratorima tako i studentima. Omogućava studentima da se prijave, pregledaju datume ispita i dodaju ispite na svoju listu. Administratori mogu upravljati informacijama o studentima i izvršavati administrativne zadatke.
 
 ## Sadržaj
 - [Instalacija](#instalacija)
 - [Upotreba](#upotreba)
 - [Funkcionalnosti](#funkcionalnosti)
 - [Doprinos](#doprinos)
+- [Fotografije](#fotografije)
 - [Licenca](#licenca)
 
 ## Instalacija
@@ -42,6 +45,9 @@ Da biste pokrenuli ovaj projekat, pratite sledeće korake:
 - Komandna linija za administratore.
 - Jednostavan interfejs za studente.
 - Dinamičko učitavanje datuma ispita i predmeta.
+
+## Fotografije
+
 
 ## Licenca
 Ovaj projekat je licenciran pod MIT licencom. Slobodno ga koristite, modifikujte i distribuirajte prema potrebama.
