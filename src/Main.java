@@ -32,12 +32,6 @@ public class Main {
         System.out.println("0. Izlaz");
     }
 
-    public static void logout(){
-        prijavljen = false;
-        isAdmin = false;
-        trenutniKorisnik = null;
-    }
-
     public static void main(String[] args) {
         Student.Admin admin = new Student.Admin();
         Student student = new Student("rile037", 123, "Nikola", "Radisa", "Rilak", "14.08.1999.", "NRT", 2018);
@@ -46,9 +40,9 @@ public class Main {
         Ispit ispit = new Ispit();
 
 
-        System.out.println("Dobrodosli, molimo Vas da se prijavite");
+        System.out.println("\n- Molimo Vas da se prijavite");
         while (true) {
-            if (!prijavljen) {
+            while(!prijavljen) {
                 System.out.println("Korisnicko ime: ");
                 String korisnickoIme = scanner.next();
                 System.out.println("Lozinka: ");
@@ -58,7 +52,6 @@ public class Main {
                     isAdmin = true; // Postavljamo isAdmin na true za admina
                     trenutniKorisnik = admin;
                     prijavljen = true;
-                    break;
                 } else {
                     int lozinka = Integer.parseInt(lozinkaAdmin);
                     boolean rezultatPrijave = loginHandler.login(listaStudenata, korisnickoIme, lozinka);
@@ -66,18 +59,15 @@ public class Main {
                         System.out.println("Uspesna prijava");
                         prijavljen = true;
                         trenutniKorisnik = student;
-                        break;
                     } else {
                         System.out.println("Pogresni podaci, pokusajte ponovo.");
                     }
                 }
             }
-        }
-        if(prijavljen){
             // Nakon uspešnog logovanja, ide provera za admina
             if (isAdmin) {
                 adminMenu();
-                while (true) {
+                while (prijavljen) {
                     System.out.println("Unos: ");
                     String komanda = scanner.next();
                     switch (komanda) {
@@ -114,17 +104,19 @@ public class Main {
                             admin.izlistajStudente();
                         }
                         case "logout" -> {
-                            logout();
-                            return;
+                            prijavljen = false;
+                            isAdmin = false;
+                            trenutniKorisnik = null;
                         }
 
                         default -> System.out.println("Pogresan izbor.");
                     }
                 }
-            } else {
+            }
+            else {
                 // U suprotnom prikazujemo studenta i njegov interfejs
                 System.out.println("Dobrodosli, " + student.getIme());
-                while (true) {
+                while (prijavljen) {
                     studentMenu(); // Pozivamo studentMenu u kojem je spisak opcija
                     HashMap<String, String> datumiSvihIspita = ispit.getDatumiSvihIspita();
                     int izbor = scanner.nextInt();
@@ -171,11 +163,16 @@ public class Main {
                                 }
                             }
                         }
+
+                        case 0 -> {
+                            prijavljen = false;
+                            trenutniKorisnik = null;
+                        }
                         default -> System.out.println("Pogresan izbor.");
                     }
                 }
             }
 
         }
-}
+        }
     }
